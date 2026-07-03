@@ -5,7 +5,7 @@
 -- Dumped from database version 16.2
 -- Dumped by pg_dump version 16.2
 
--- Started on 2026-06-22 12:10:02
+-- Started on 2026-07-03 08:57:50
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -19,7 +19,7 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- TOC entry 4801 (class 1262 OID 16398)
+-- TOC entry 4802 (class 1262 OID 16398)
 -- Name: instagram; Type: DATABASE; Schema: -; Owner: postgres
 --
 
@@ -55,7 +55,7 @@ CREATE TABLE public.publicaciones (
     usuario_id integer NOT NULL,
     url_imagen character varying NOT NULL,
     descripcion text,
-    likes integer DEFAULT 0 NOT NULL,
+    likes integer DEFAULT 0,
     fecha_creacion timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
@@ -111,7 +111,7 @@ ALTER TABLE public.usuarios ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
 
 
 --
--- TOC entry 4795 (class 0 OID 16412)
+-- TOC entry 4796 (class 0 OID 16412)
 -- Dependencies: 218
 -- Data for Name: publicaciones; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -121,7 +121,7 @@ COPY public.publicaciones (id, usuario_id, url_imagen, descripcion, likes, fecha
 
 
 --
--- TOC entry 4793 (class 0 OID 16400)
+-- TOC entry 4794 (class 0 OID 16400)
 -- Dependencies: 216
 -- Data for Name: usuarios; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -131,7 +131,7 @@ COPY public.usuarios (id, nombre_usuario, nombre_completo, email, password, foto
 
 
 --
--- TOC entry 4802 (class 0 OID 0)
+-- TOC entry 4803 (class 0 OID 0)
 -- Dependencies: 217
 -- Name: publicaciones_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -140,7 +140,7 @@ SELECT pg_catalog.setval('public.publicaciones_id_seq', 1, false);
 
 
 --
--- TOC entry 4803 (class 0 OID 0)
+-- TOC entry 4804 (class 0 OID 0)
 -- Dependencies: 215
 -- Name: usuarios_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -184,7 +184,16 @@ ALTER TABLE ONLY public.usuarios
     ADD CONSTRAINT usuarios_unique_1 UNIQUE (email);
 
 
--- Completed on 2026-06-22 12:10:02
+--
+-- TOC entry 4649 (class 2606 OID 16421)
+-- Name: usuarios usuarios_publicaciones_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuarios
+    ADD CONSTRAINT usuarios_publicaciones_fk FOREIGN KEY (id) REFERENCES public.publicaciones(id) ON DELETE CASCADE;
+
+
+-- Completed on 2026-07-03 08:57:50
 
 --
 -- PostgreSQL database dump complete

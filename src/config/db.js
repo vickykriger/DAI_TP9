@@ -5,5 +5,4 @@ const config={
     password: process.env.PASSWORD,
     port: process.env.PORT
 }
-console.log(config)
-export default config
+export default config;
