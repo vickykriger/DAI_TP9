@@ -1,4 +1,4 @@
-import config from '../config/db';
+import config from '../config/db.js';
 import pkg from 'pg';
 const { Client } = pkg;
 

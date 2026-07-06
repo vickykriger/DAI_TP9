@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import LogHelper from '../helpers/LogHelper';
+import LogHelper from '../helpers/LogHelper.js';
 const JWT_SECRET = process.env.JWT_SECRET;
 
 export const authMiddleware = (req, res, next) => {
